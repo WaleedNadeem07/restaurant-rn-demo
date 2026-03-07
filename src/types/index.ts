@@ -8,6 +8,11 @@ export type TabParamList = {
   Cart: undefined;
 };
 
+export type MenuStackParamList = {
+  MenuList: undefined;
+  ItemDetail: { itemId: string };
+};
+
 export type MenuItem = {
   id: string;
   name: string;
