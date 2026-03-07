@@ -41,7 +41,7 @@ export default function ItemDetailScreen() {
       name: item.name,
       price: item.price,
       image: item.image,
-    });
+    }, quantity);
 
     setToastVisible(true);
   };
@@ -95,13 +95,6 @@ export default function ItemDetailScreen() {
           />
         )}
         
-        {/* Back Button */}
-        <TouchableOpacity 
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.backButtonText}>←</Text>
-        </TouchableOpacity>
       </View>
 
       {/* Content Section */}

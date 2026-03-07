@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator, Dimensions } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { MenuItem } from '../types';
 
 const { width } = Dimensions.get('window');
@@ -53,7 +54,8 @@ export default function MenuItemCard({ item, onViewPress }: MenuItemCardProps) {
           {item.description}
         </Text>
         <View style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>View Details →</Text>
+          <Text style={styles.buttonText}>View Details</Text>
+          <Ionicons name="arrow-forward" size={14} color="#ff6b6b" />
         </View>
       </View>
     </TouchableOpacity>
@@ -129,10 +131,13 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   buttonText: {
     color: '#ff6b6b',
     fontSize: 12,
     fontWeight: '600',
+    marginRight: 4,
   },
 });

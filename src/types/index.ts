@@ -6,6 +6,7 @@ export type RootStackParamList = {
 export type TabParamList = {
   Menu: undefined;
   Cart: undefined;
+  Checkout: undefined;
 };
 
 export type MenuStackParamList = {
