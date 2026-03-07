@@ -1,18 +1,19 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useMemo, useState } from 'react';
-import { 
-  Image, 
-  ScrollView, 
-  StyleSheet, 
-  Text, 
-  TouchableOpacity, 
-  View,
-  Dimensions,
-  ActivityIndicator,
-  Alert
+import {
+    ActivityIndicator,
+    Alert,
+    Dimensions,
+    Image,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from 'react-native';
 import { mockMenu } from '../data/mockMenu';
+import { useCartStore } from '../store/cartStore';
 import { MenuStackParamList } from '../types';
 
 const { width } = Dimensions.get('window');
@@ -30,10 +31,20 @@ export default function ItemDetailScreen() {
 
   const item = useMemo(() => mockMenu.find((i) => i.id === itemId), [itemId]);
 
+  const addItem = useCartStore((state) => state.addItem);
+
   const handleAddToCart = () => {
+    if (!item) return; // safety check, though component returns earlier
+    addItem({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      image: item.image,
+    });
+
     Alert.alert(
       'Added to Cart',
-      `${quantity}x ${item?.name} added to your cart`,
+      `${quantity}x ${item.name} added to your cart`,
       [{ text: 'OK' }]
     );
   };
