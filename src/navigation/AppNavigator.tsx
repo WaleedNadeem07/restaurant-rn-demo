@@ -5,6 +5,7 @@ import CartScreen from '../screens/CartScreen';
 import ItemDetailScreen from '../screens/ItemDetailScreen';
 import LoginScreen from '../screens/LoginScreen';
 import MenuScreen from '../screens/MenuScreen';
+import { useCartStore } from '../store/cartStore';
 import { MenuStackParamList, RootStackParamList, TabParamList } from '../types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -29,6 +30,8 @@ function MenuStackNavigator() {
 }
 
 function TabNavigator() {
+  const cartItemCount = useCartStore((state) => state.items.length);
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -36,7 +39,13 @@ function TabNavigator() {
         component={MenuStackNavigator}
         options={{ headerShown: false }}
       />
-      <Tab.Screen name="Cart" component={CartScreen} />
+      <Tab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          tabBarBadge: cartItemCount > 0 ? cartItemCount : undefined,
+        }}
+      />
     </Tab.Navigator>
   );
 }

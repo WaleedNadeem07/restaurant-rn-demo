@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import MenuItemCard from '../components/MenuItemCard';
 import { mockMenu } from '../data/mockMenu';
 import { MenuItem, MenuStackParamList } from '../types';
@@ -10,9 +10,18 @@ type MenuScreenNavigationProp = NativeStackNavigationProp<MenuStackParamList, 'M
 
 export default function MenuScreen() {
   const navigation = useNavigation<MenuScreenNavigationProp>();
+  const [refreshing, setRefreshing] = useState(false);
 
   const handleViewPress = (itemId: string) => {
     navigation.navigate('ItemDetail', { itemId });
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    // Simulate API call
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
   };
 
   const renderItem = ({ item }: { item: MenuItem }) => (
@@ -28,6 +37,14 @@ export default function MenuScreen() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContent}
         scrollEnabled={true}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={['#ff6b6b']}
+            tintColor="#ff6b6b"
+          />
+        }
       />
     </View>
   );

@@ -1,9 +1,14 @@
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
 import React, { useMemo } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useCartStore } from '../store/cartStore';
-import { CartItem } from '../types';
+import { CartItem, TabParamList } from '../types';
+
+type CartScreenNavigationProp = BottomTabNavigationProp<TabParamList, 'Cart'>;
 
 export default function CartScreen() {
+  const navigation = useNavigation<CartScreenNavigationProp>();
   const items = useCartStore((state) => state.items);
   const increaseQty = useCartStore((state) => state.increaseQty);
   const decreaseQty = useCartStore((state) => state.decreaseQty);
@@ -50,7 +55,16 @@ export default function CartScreen() {
 
   const renderEmptyComponent = () => (
     <View style={styles.emptyContainer}>
-      <Text style={styles.emptyText}>Your cart is empty</Text>
+      <Text style={styles.emptyEmoji}>🍔</Text>
+      <Text style={styles.emptyTitle}>Your cart is empty</Text>
+      <Text style={styles.emptySubtitle}>Add some delicious items from our menu</Text>
+      <TouchableOpacity
+        style={styles.browseButton}
+        onPress={() => navigation.navigate('Menu')}
+        activeOpacity={0.8}
+      >
+        <Text style={styles.browseButtonText}>Browse Menu</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -173,16 +187,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
   },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 50,
-  },
-  emptyText: {
-    fontSize: 16,
-    color: '#999',
-  },
   totalContainer: {
     backgroundColor: '#fff',
     padding: 16,
@@ -223,5 +227,39 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     color: '#ff6b6b',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 40,
+  },
+  emptyEmoji: {
+    fontSize: 64,
+    marginBottom: 16,
+  },
+  emptyTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  emptySubtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 32,
+    textAlign: 'center',
+  },
+  browseButton: {
+    backgroundColor: '#ff6b6b',
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    borderRadius: 8,
+  },
+  browseButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });

@@ -3,7 +3,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useMemo, useState } from 'react';
 import {
     ActivityIndicator,
-    Alert,
     Dimensions,
     Image,
     ScrollView,
@@ -12,6 +11,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+import Toast from '../components/Toast';
 import { mockMenu } from '../data/mockMenu';
 import { useCartStore } from '../store/cartStore';
 import { MenuStackParamList } from '../types';
@@ -28,6 +28,7 @@ export default function ItemDetailScreen() {
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [toastVisible, setToastVisible] = useState(false);
 
   const item = useMemo(() => mockMenu.find((i) => i.id === itemId), [itemId]);
 
@@ -42,11 +43,7 @@ export default function ItemDetailScreen() {
       image: item.image,
     });
 
-    Alert.alert(
-      'Added to Cart',
-      `${quantity}x ${item.name} added to your cart`,
-      [{ text: 'OK' }]
-    );
+    setToastVisible(true);
   };
 
   const handleImageLoad = () => {
@@ -67,10 +64,11 @@ export default function ItemDetailScreen() {
   }
 
   return (
-    <ScrollView 
-      style={styles.container}
-      showsVerticalScrollIndicator={false}
-    >
+    <View style={{ flex: 1 }}>
+      <ScrollView 
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
       {/* Image Section */}
       <View style={styles.imageContainer}>
         {imageLoading && (
@@ -158,6 +156,12 @@ export default function ItemDetailScreen() {
         </TouchableOpacity>
       </View>
     </ScrollView>
+    <Toast
+      message="Added to cart"
+      visible={toastVisible}
+      onHide={() => setToastVisible(false)}
+    />
+    </View>
   );
 }
 
