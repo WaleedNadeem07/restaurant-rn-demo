@@ -89,20 +89,26 @@ Login → Browse Menu → View Item → Add to Cart → Cart → Checkout → Pl
 
 ---
 
-## Screenshots
+## 📸 Screenshots
 
-Login 
-![alt text](<WhatsApp Image 2026-03-09 at 12.44.17 AM.jpeg>)
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
 
-Menu 
-![alt text](<WhatsApp Image 2026-03-09 at 12.44.17 AM (1).jpeg>)
+**Login Screen**  
+![Login](screenshots/login.jpeg)
 
-Item Details
-![alt text](<WhatsApp Image 2026-03-09 at 12.44.16 AM.jpeg>)
+**Menu Screen**  
+![Menu](screenshots/menu.jpeg)
 
-Cart 
-![alt text](<WhatsApp Image 2026-03-09 at 12.44.16 AM (1).jpeg>)
+**Item Details**  
+![Item Details](screenshots/item-details.jpeg)
 
-Checkout
-![alt text](<WhatsApp Image 2026-03-09 at 12.44.16 AM (2).jpeg>)
-![alt text](<WhatsApp Image 2026-03-09 at 12.44.15 AM.jpeg>)
+**Cart Screen**  
+![Cart](screenshots/cart.jpeg)
+
+**Checkout - Order Summary**  
+![Checkout Summary](screenshots/checkout1.jpeg)
+
+**Checkout - Confirmation**  
+![Checkout Confirmation](screenshots/checkout2.jpeg)
+
+</div>
