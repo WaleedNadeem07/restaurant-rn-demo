@@ -1,8 +1,10 @@
-import React from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import CheckoutOrderItem from '../components/CheckoutOrderItem';
+import PriceSummaryRow from '../components/PriceSummaryRow';
 import { useCartStore } from '../store/cartStore';
 import { CartItem, TabParamList } from '../types';
 
@@ -33,14 +35,8 @@ export default function CheckoutScreen() {
   };
 
   const renderItem = ({ item }: { item: CartItem }) => (
-    <View style={styles.orderItem}>
-        <View style={styles.itemInfo}>
-        <Text style={styles.itemName}>{item.name}</Text>
-        <Text style={styles.itemQuantity}>x {item.quantity}</Text>
-        </View>
-        <Text style={styles.itemPrice}>${(item.price * item.quantity).toFixed(2)}</Text>
-    </View>
-    );
+    <CheckoutOrderItem item={item} />
+  );
 
   // ⭐ Handle Empty Cart
   if (items.length === 0) {
@@ -76,20 +72,19 @@ export default function CheckoutScreen() {
 
       {/* Order Summary */}
       <View style={styles.summarySection}>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Subtotal</Text>
-          <Text style={styles.summaryValue}>${subtotal.toFixed(2)}</Text>
-        </View>
-
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Tax (10%)</Text>
-          <Text style={styles.summaryValue}>${tax.toFixed(2)}</Text>
-        </View>
-
-        <View style={[styles.summaryRow, styles.totalRow]}>
-          <Text style={styles.totalLabel}>Total</Text>
-          <Text style={styles.totalValue}>${total.toFixed(2)}</Text>
-        </View>
+        <PriceSummaryRow
+          label="Subtotal"
+          value={`$${subtotal.toFixed(2)}`}
+        />
+        <PriceSummaryRow
+          label="Tax (10%)"
+          value={`$${tax.toFixed(2)}`}
+        />
+        <PriceSummaryRow
+          label="Total"
+          value={`$${total.toFixed(2)}`}
+          isTotal
+        />
       </View>
 
       {/* ⭐ Disable button if empty */}
@@ -176,41 +171,6 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
 
-  orderItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-
-  itemInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1, 
-    marginRight: 12, 
-  },
-
-  itemName: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#333',
-  },
-
-  itemQuantity: {
-    fontSize: 16,
-    color: '#666',
-    marginLeft: 8,
-    fontWeight: '500',
-  },
-
-  itemPrice: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#ff6b6b',
-  },
-
   summarySection: {
     backgroundColor: '#fff',
     borderRadius: 12,
@@ -221,42 +181,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
-  },
-
-  summaryRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 8,
-  },
-
-  summaryLabel: {
-    fontSize: 16,
-    color: '#666',
-  },
-
-  summaryValue: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#333',
-  },
-
-  totalRow: {
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-    paddingTop: 12,
-    marginTop: 8,
-  },
-
-  totalLabel: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-  },
-
-  totalValue: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#ff6b6b',
   },
 
   placeOrderButton: {
