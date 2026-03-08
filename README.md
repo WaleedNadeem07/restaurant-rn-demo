@@ -1,50 +1,108 @@
-# Welcome to your Expo app 👋
+# Restaurant Ordering Demo (React Native)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A small mobile restaurant ordering app built with **React Native + Expo** to demonstrate rapid ramp-up with React Native while applying strong React fundamentals.
 
-## Get started
+The app simulates a simple ordering flow where users can browse menu items, view product details, add items to a cart, and place an order.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## Tech Stack
 
-2. Start the app
+- React Native
+- Expo
+- TypeScript
+- React Navigation
+- Zustand (state management)
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## Features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Login screen
+- Menu browsing with pull-to-refresh
+- Item detail screen with quantity selector
+- Add to cart with toast notification
+- Cart management (increase/decrease quantity, remove items)
+- Checkout screen with order summary and pricing breakdown
+- Order confirmation flow
+- Cart badge showing number of items
+- Empty cart states and loading indicators
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## Navigation Structure
 
-When you're ready, run:
 
-```bash
-npm run reset-project
-```
+Login
+↓
+Tabs
+├ Menu
+│ └ Item Detail
+├ Cart
+└ Checkout
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+## Project Structure
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
+src
+├ components
+├ screens
+├ navigation
+├ store
+├ data
+└ types
 
-Join our community of developers creating universal apps.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- **components** – reusable UI components  
+- **screens** – main application screens  
+- **navigation** – React Navigation setup  
+- **store** – Zustand cart state management  
+- **data** – mock menu data  
+- **types** – TypeScript types  
+
+---
+
+## Running the Project
+
+Install dependencies:
+
+
+npm install
+
+
+Start the development server:
+
+
+npx expo start
+
+
+Then open using **Expo Go** or an emulator.
+
+---
+
+## Demo Flow
+
+Login → Browse Menu → View Item → Add to Cart → Cart → Checkout → Place Order
+
+---
+
+## Screenshots
+
+Login 
+![alt text](<WhatsApp Image 2026-03-09 at 12.44.17 AM.jpeg>)
+
+Menu 
+![alt text](<WhatsApp Image 2026-03-09 at 12.44.17 AM (1).jpeg>)
+
+Item Details
+![alt text](<WhatsApp Image 2026-03-09 at 12.44.16 AM.jpeg>)
+
+Cart 
+![alt text](<WhatsApp Image 2026-03-09 at 12.44.16 AM (1).jpeg>)
+
+Checkout
+![alt text](<WhatsApp Image 2026-03-09 at 12.44.16 AM (2).jpeg>)
+![alt text](<WhatsApp Image 2026-03-09 at 12.44.15 AM.jpeg>)
